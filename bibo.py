@@ -3,6 +3,10 @@ with open("corpus.txt", "r") as f:
 
 no_quotes = corpus.replace("\"", "").lower()
 
-no_punctuation = no_quotes.replace("!", "!\n").replace("?", "?\n").replace(".", ".\n")
 
-print("\n".join(no_punctuation.split("\n")))
+no_punctuation = no_quotes.replace(
+    "!", "\n").replace("?", "\n").replace(".", "\n")
+
+sentences = no_punctuation.split("\n")
+
+print("\n".join(sentences))
