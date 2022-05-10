@@ -15,15 +15,23 @@ with open("raw_corpus.txt", "r") as f:
 # lower
 corpus = corpus.lower()
 # no abbreviations
-corpus = corpus.replace("n't", " not").replace("t's", "t is")
+corpus = corpus.replace("n't", " not").replace("'s", " is")
 # no quotes
 corpus = corpus.replace("\" ", "\n")
-corpus = corpus.replace(" \"", "\n")
+corpus = corpus.replace("\"", "\n")
 # no punctuation
 corpus = corpus.replace("! ", "\n").replace(
-    "? ", "\n").replace(". ", "\n").replace(", ", "\n")
+    "? ", "\n").replace(". ", "\n")
+# commas
+corpus = corpus.replace(",", "\n")
 # get sentences in a list
 sentences = corpus.split("\n")
+
+try:
+    while True:
+        sentences.remove("")
+except ValueError:
+    pass
 
 
 # save new corpus
