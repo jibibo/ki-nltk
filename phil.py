@@ -4,8 +4,7 @@ from nltk import word_tokenize
 from nltk.probability import FreqDist
 
 # open and read plain text file
-path = nltk.data.find('C:/Users/phili/Desktop/TTTV/PAV/tekst/plainCG.txt')
-raw = open(path, 'rU').read()
+raw = open("corpus_raw.txt", 'rU').read()
 lines = []
 for line in raw.split('\n'):
     # !, ? vervangen door .
