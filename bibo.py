@@ -7,7 +7,7 @@ from nltk.probability import FreqDist
 
 
 # open and read
-with open("corpus.txt", "r") as f:
+with open("raw_corpus.txt", "r") as f:
     corpus = f.readline()  # file is 1 line
 
 
@@ -20,10 +20,15 @@ corpus = corpus.replace("n't", " not").replace("t's", "t is")
 corpus = corpus.replace("\" ", "\n")
 corpus = corpus.replace(" \"", "\n")
 # no punctuation
-corpus = corpus.replace("!", "\n").replace(
-    "?", "\n").replace(".", "\n").replace(",", "\n")
+corpus = corpus.replace("! ", "\n").replace(
+    "? ", "\n").replace(". ", "\n").replace(", ", "\n")
 # get sentences in a list
 sentences = corpus.split("\n")
+
+
+# save new corpus
+with open("corpus.txt", "w") as f:
+    f.write(corpus)
 
 
 # print corpus
