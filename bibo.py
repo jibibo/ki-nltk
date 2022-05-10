@@ -1,4 +1,6 @@
-import nltk, re, pprint
+import nltk
+import re
+import pprint
 # nltk.download("punkt")
 from nltk import word_tokenize
 from nltk.probability import FreqDist
@@ -15,15 +17,17 @@ corpus = corpus.lower()
 # no abbreviations
 corpus = corpus.replace("n't", " not").replace("t's", "t is")
 # no quotes
-corpus = corpus.replace("\"", "")
+corpus = corpus.replace("\" ", "\n")
+corpus = corpus.replace(" \"", "\n")
 # no punctuation
-corpus = corpus.replace("!", "\n").replace("?", "\n").replace(".", "\n")
+corpus = corpus.replace("!", "\n").replace(
+    "?", "\n").replace(".", "\n").replace(",", "\n")
 # get sentences in a list
 sentences = corpus.split("\n")
 
 
-# print text
-print("\n".join(sentences))
+# print corpus
+print(corpus)
 
 
 # frequency distribution
