@@ -1,4 +1,5 @@
 import nltk, re, pprint
+# nltk.download("punkt")
 from nltk import word_tokenize
 from nltk.probability import FreqDist
 
@@ -9,13 +10,16 @@ with open("corpus.txt", "r") as f:
 
 
 # preprocessing
-lower = corpus.lower()
-no_abbreviations = lower.replace("n't", " not")
-no_quotes = no_abbreviations.replace("\"", "")
-no_punctuation = no_quotes.replace(
-    "!", "\n").replace("?", "\n").replace(".", "\n")
-
-sentences = no_punctuation.split("\n")
+# lower
+corpus = corpus.lower()
+# no abbreviations
+corpus = corpus.replace("n't", " not").replace("t's", "t is")
+# no quotes
+corpus = corpus.replace("\"", "")
+# no punctuation
+corpus = corpus.replace("!", "\n").replace("?", "\n").replace(".", "\n")
+# get sentences in a list
+sentences = corpus.split("\n")
 
 
 # print text
@@ -31,4 +35,17 @@ fdist = FreqDist(tokenized_text)
 # show corpus stats
 print(f"sentences: {len(sentences)}")
 
-hapaxes = len(fdist.hapaxes())
+hapaxes = fdist.hapaxes()  # hapaxes = unique words
+print(f"hapaxes: {len(hapaxes)}")
+
+total_words = 0
+for sentence in sentences:
+    words_in_sentence = len(sentence.split())
+    total_words += words_in_sentence
+
+print(f"total words: {total_words}")
+
+average_length = total_words / len(sentences)
+print(f"average sentence length: {average_length}")
+
+print(f"top 30 common words: {fdist.most_common(30)}")
