@@ -4,42 +4,41 @@ import pprint
 # nltk.download("punkt")
 from nltk import word_tokenize
 from nltk.probability import FreqDist
+import ssl
+
+try:
+    _create_unverified_https_context = ssl._create_unverified_context
+except AttributeError:
+    pass
+else:
+    ssl._create_default_https_context = _create_unverified_https_context
+
+nltk.download()
 
 
 # open and read
-with open("corpus_raw.txt", "r") as f:
-    corpus = f.read()  # file is 1 line
+with open("raw_corpus.txt", "r") as f:
+    corpus = f.readline()  # file is 1 line
 
 
 # preprocessing
 # lower
 corpus = corpus.lower()
 # no abbreviations
-corpus = corpus.replace("n't", " not")
+corpus = corpus.replace("n't", " not").replace("t's", "t is")
 # no quotes
-corpus = corpus.replace("\"", "\n")
-corpus = corpus.replace("\"", "\n")
+corpus = corpus.replace("\" ", "\n")
+corpus = corpus.replace(" \"", "\n")
 # no punctuation
-corpus = corpus.replace("!", "").replace("?", "").replace(".", "")
-# commas
-corpus = corpus.replace(",", "")
+corpus = corpus.replace("! ", "\n").replace(
+    "? ", "\n").replace(". ", "\n").replace(", ", "\n")
 # get sentences in a list
 sentences = corpus.split("\n")
 
-corpus = corpus.replace("'s"," his")
-
-try:
-    while True:
-        sentences.remove("")
-except ValueError:
-    pass
-
-print(sentences)
-
 
 # save new corpus
-# with open("corpus.txt", "w") as f:
-#     f.write(corpus)
+with open("corpus.txt", "w") as f:
+    f.write(corpus)
 
 
 # print corpus
