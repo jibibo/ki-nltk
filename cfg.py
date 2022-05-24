@@ -1,6 +1,6 @@
 import nltk
 from nltk import CFG
-from nltk.parse.generate import generate
+from generate2 import generate
 from nltk.grammar import FeatureGrammar
 import random
 
@@ -405,5 +405,6 @@ DT -> 'a'
 NN -> 'man'
 """)
 
-for sentence in generate(cfg_1, n=20, depth=8):
-    print(" ".join(sentence))
+for i in range(50):
+    for sentence in generate(cfg_1, n=20, depth=8):
+        print(" ".join(sentence))
