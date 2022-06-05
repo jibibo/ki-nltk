@@ -4,27 +4,27 @@ from generate2 import generate
 from nltk.grammar import FeatureGrammar
 import random
 
-cfg_1 = CFG.fromstring("""
-S -> NP VP
-NP -> PRP
-PRP -> 'he'
-VP -> VDB PP
-VDB -> 'lived' 
-PP -> IN NP
-IN -> 'in'
-NP -> NN
-NN -> 'africa'
-S -> NP VP
-NP -> PRP
-PRP -> 'he'
-VP -> VDB ADJP ADVP
-VBD -> 'was'
-ADJP -> JJ
-JJ -> 'curious'
-ADVP -> RB
-RB -> 'again'
-S -> NP VP
-NP -> DT NN
+    cfg_1 = CFG.fromstring("""
+    S -> NP VP
+    NP -> PRP
+    PRP -> 'he'
+    VP -> VDB PP
+    VDB -> 'lived' 
+    PP -> IN NP
+    IN -> 'in'
+    NP -> NN
+    NN -> 'africa'
+    S -> NP VP
+    NP -> PRP
+    PRP -> 'he'
+    VP -> VDB ADJP ADVP
+    VBD -> 'was'
+    ADJP -> JJ
+    JJ -> 'curious'
+    ADVP -> RB
+    RB -> 'again'
+    S -> NP VP
+    NP -> DT NN
 DT -> 'the'
 NN -> 'traffic'
 VP -> VBD NP PRT
@@ -405,6 +405,7 @@ DT -> 'a'
 NN -> 'man'
 """)
 
-for i in range(50):
-    for sentence in generate(cfg_1, n=20, depth=8):
-        print(" ".join(sentence))
+with open("resultaten.txt", "w") as f:
+    for i in range(50):
+        for sentence in generate(cfg_1, n=20, depth=8):
+            f.write(" ".join(sentence) + "\n")

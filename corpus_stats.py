@@ -9,11 +9,15 @@ with open("corpus.txt", "r") as f:
 
 print(f"Sentences: {len(lines)}")
 
+words = set()
 word_count = 0
 for line in lines:
-    word_count += len(line.split())
+    for word in line.split():
+        word_count += 1
+        if word not in words:
+            words.add(word)
 
-print(f"Word count: {word_count}")
+print(f"Word count: {word_count}, unique: {words} ({len(words)})")
 
 one_liner = ' '.join(lines)
 tokenized_text = nltk.tokenize.word_tokenize(one_liner)
